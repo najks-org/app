@@ -13,6 +13,7 @@
             --light: #f8f9fa;
             --dark: #212529;
             --success: #4cc9f0;
+            --warning: #f72585;
         }
         
         body {
@@ -36,18 +37,33 @@
             text-align: center;
             border-radius: 0 0 20px 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 15px 15px;
+            opacity: 0.3;
         }
         
         .logo {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            position: relative;
         }
         
         .tagline {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-bottom: 1.5rem;
+            position: relative;
         }
         
         .app-card {
@@ -59,6 +75,12 @@
             margin: 3rem auto;
             display: flex;
             flex-direction: column;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
         }
         
         .app-header {
@@ -66,6 +88,7 @@
             color: white;
             padding: 1.5rem;
             text-align: center;
+            position: relative;
         }
         
         .app-content {
@@ -78,24 +101,36 @@
         .app-icon {
             width: 120px;
             height: 120px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 24px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+            background-color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 3px solid #f0f0f0;
         }
         
-        .app-icon i {
-            font-size: 3.5rem;
-            color: white;
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .app-icon:hover {
+            transform: scale(1.05) rotate(5deg);
         }
         
         .app-title {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--warning));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
         
         .app-developer {
@@ -125,11 +160,28 @@
             justify-content: center;
             text-decoration: none;
             width: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
         }
         
         .download-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+        }
+        
+        .download-btn:hover::before {
+            left: 100%;
         }
         
         .download-btn i {
@@ -147,6 +199,11 @@
         
         .spec-item {
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .spec-item:hover {
+            transform: scale(1.1);
         }
         
         .spec-value {
@@ -161,11 +218,66 @@
             margin-top: 0.3rem;
         }
         
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+            width: 100%;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-desc {
+            font-size: 0.9rem;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        .smart-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--warning), #b5179e);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+        
         footer {
             text-align: center;
             padding: 2rem 0;
             color: #6c757d;
             font-size: 0.9rem;
+            background-color: #f8f9fa;
+            border-top: 1px solid #e9ecef;
         }
         
         @media (max-width: 768px) {
@@ -181,11 +293,16 @@
                 flex-direction: column;
                 gap: 1rem;
             }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="header-pattern"></div>
         <div class="container">
             <div class="logo">NAJKS Store</div>
             <div class="tagline">Premium corporate apps for your business</div>
@@ -199,7 +316,7 @@
             </div>
             <div class="app-content">
                 <div class="app-icon">
-                    <i class="fas fa-building"></i>
+                    <img src="https://scontent.fcgp36-1.fna.fbcdn.net/v/t39.30808-1/278793672_509097584210224_8834432012025622781_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=101&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeF_nuUR19qfewojv9NFyhngrNLJO3l_jMes0sk7eX-Mx7fyA-B77AHl8tgEEpFAklgPZlLD1QqUfOFlHR0j9tm1&_nc_ohc=MDIbsf_roCUQ7kNvwEHLkHy&_nc_oc=AdmERvKDJnqzhNn7nrJRQ33kjmNEE5gJ6ZcmahGqI7gS-4eYEPckKSsvsp5OJ0bTiaQ&_nc_zt=24&_nc_ht=scontent.fcgp36-1.fna&_nc_gid=KWbLvc3BzVo1E0PIqjEGoQ&oh=00_AfMMj_kIqS4_uyh9_dZfLbb2LBWBmTDsOXcc6TbWJjY76w&oe=684D036A" alt="NAJKS Download Corporate Icon">
                 </div>
                 <h3 class="app-title">NAJKS Download Corporate</h3>
                 <div class="app-developer">NAJKS Technologies</div>
@@ -226,6 +343,39 @@
                         <div class="spec-label">Android</div>
                     </div>
                 </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                        <h4 class="feature-title">Thoughtful Design <span class="smart-badge">THIC</span></h4>
+                        <p class="feature-desc">Intuitive interface designed with cognitive ergonomics in mind for effortless adoption.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                        <h4 class="feature-title">Human-Centered <span class="smart-badge">THIC</span></h4>
+                        <p class="feature-desc">Built around real corporate workflows with customizable user experiences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-robot"></i></div>
+                        <h4 class="feature-title">Intelligent <span class="smart-badge">THIC</span></h4>
+                        <p class="feature-desc">AI-powered suggestions and automated file organization saves you hours.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                        <h4 class="feature-title">Context-Aware <span class="smart-badge">THIC</span></h4>
+                        <p class="feature-desc">Adapts to your industry, team size and specific business requirements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-bullseye"></i></div>
+                        <h4 class="feature-title">Specific <span class="smart-badge">SMART</span></h4>
+                        <p class="feature-desc">Targeted solutions for corporate file management with measurable outcomes.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="feature-title">Measurable <span class="smart-badge">SMART</span></h4>
+                        <p class="feature-desc">Built-in analytics track productivity gains and ROI for stakeholders.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -238,9 +388,38 @@
     </footer>
     
     <script>
+        // THIC SMART interactive elements
         document.querySelector('.download-btn').addEventListener('click', function() {
-            // You can add tracking or analytics here if needed
-            console.log('Download initiated for NAJKS Download Corporate');
+            // Track download attempt
+            console.log('THIC SMART Download initiated for NAJKS Download Corporate');
+            
+            // Add visual feedback
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            
+            // Simulate download completion (in real scenario this would be handled by the download)
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-check"></i> Download Complete!';
+                this.style.background = 'linear-gradient(135deg, #4cc9f0, #4895ef)';
+            }, 2000);
+        });
+        
+        // Animate feature cards on scroll
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        featureCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease';
+            observer.observe(card);
         });
     </script>
 </body>
