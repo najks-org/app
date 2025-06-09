@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAJKS Download Corporate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            color: var(--dark);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .app-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 800px;
+            margin: 3rem auto;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .app-header {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .app-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .app-icon i {
+            font-size: 3.5rem;
+            color: white;
+        }
+        
+        .app-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .app-developer {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+        }
+        
+        .app-description {
+            text-align: center;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #495057;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            width: 200px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.6);
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+        }
+        
+        .app-specs {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .spec-item {
+            text-align: center;
+        }
+        
+        .spec-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .spec-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.3rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .app-card {
+                margin: 1.5rem auto;
+            }
+            
+            .app-content {
+                padding: 1.5rem;
+            }
+            
+            .app-specs {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">NAJKS Store</div>
+            <div class="tagline">Premium corporate apps for your business</div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="app-card">
+            <div class="app-header">
+                <h2>Featured Application</h2>
+            </div>
+            <div class="app-content">
+                <div class="app-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3 class="app-title">NAJKS Download Corporate</h3>
+                <div class="app-developer">NAJKS Technologies</div>
+                <p class="app-description">
+                    The ultimate corporate solution for seamless file management and secure downloads. 
+                    Enhance your business productivity with our powerful tools designed for modern enterprises.
+                </p>
+                
+                <a href="https://median.co/share/epqprw#apk" class="download-btn" download>
+                    <i class="fas fa-download"></i> Download Now
+                </a>
+                
+                <div class="app-specs">
+                    <div class="spec-item">
+                        <div class="spec-value">v2.4.1</div>
+                        <div class="spec-label">Version</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">25 MB</div>
+                        <div class="spec-label">Size</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">5.0+</div>
+                        <div class="spec-label">Android</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>© 2023 NAJKS Technologies. All rights reserved.</p>
+            <p>Secure downloads · Verified publisher · Corporate solutions</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.querySelector('.download-btn').addEventListener('click', function() {
+            // You can add tracking or analytics here if needed
+            console.log('Download initiated for NAJKS Download Corporate');
+        });
+    </script>
+</body>
+</html>
