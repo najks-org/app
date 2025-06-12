@@ -7,21 +7,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --warning: #f72585;
+            --primary: #3a56e8;
+            --secondary: #3830c1;
+            --accent: #3f8aeb;
+            --light: #f5f7fb;
+            --dark: #343a40;
+            --success: #42b9e0;
+            --warning: #e51a7a;
+            --neutral: #e9ecef;
         }
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f5f7fa;
+            background-color: var(--light);
             color: var(--dark);
+            transition: background-color 0.3s ease;
+        }
+        
+        body.dark-mode {
+            background-color: #121212;
+            color: #f5f5f5;
+            --light: #1e1e1e;
+            --dark: #f5f5f5;
+            --neutral: #2d2d2d;
         }
         
         .container {
@@ -39,6 +49,10 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
+        }
+        
+        .dark-mode header {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .header-pattern {
@@ -66,6 +80,28 @@
             position: relative;
         }
         
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
         .app-card {
             background: white;
             border-radius: 16px;
@@ -77,6 +113,11 @@
             flex-direction: column;
             transition: transform 0.3s ease;
             position: relative;
+        }
+        
+        .dark-mode .app-card {
+            background: #1e1e1e;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
         
         .app-card:hover {
@@ -113,6 +154,11 @@
             border: 3px solid #f0f0f0;
         }
         
+        .dark-mode .app-icon {
+            background-color: #2d2d2d;
+            border-color: #3d3d3d;
+        }
+        
         .app-icon img {
             width: 100%;
             height: 100%;
@@ -138,11 +184,19 @@
             margin-bottom: 1.5rem;
         }
         
+        .dark-mode .app-developer {
+            color: #a0a0a0;
+        }
+        
         .app-description {
             text-align: center;
             margin-bottom: 2rem;
             line-height: 1.6;
             color: #495057;
+        }
+        
+        .dark-mode .app-description {
+            color: #c0c0c0;
         }
         
         .download-btn {
@@ -197,6 +251,10 @@
             border-top: 1px solid #e9ecef;
         }
         
+        .dark-mode .app-specs {
+            border-top-color: #3d3d3d;
+        }
+        
         .spec-item {
             text-align: center;
             transition: transform 0.3s ease;
@@ -218,6 +276,10 @@
             margin-top: 0.3rem;
         }
         
+        .dark-mode .spec-label {
+            color: #a0a0a0;
+        }
+        
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -233,11 +295,27 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             border-left: 4px solid var(--accent);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        .dark-mode .feature-card {
+            background: #2d2d2d;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode .feature-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
         
         .feature-icon {
@@ -257,6 +335,10 @@
             line-height: 1.5;
         }
         
+        .dark-mode .feature-desc {
+            color: #a0a0a0;
+        }
+        
         .smart-badge {
             display: inline-block;
             background: linear-gradient(135deg, var(--warning), #b5179e);
@@ -271,13 +353,124 @@
             vertical-align: middle;
         }
         
+        .metrics {
+            background: var(--neutral);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .dark-mode .metrics {
+            background: #2d2d2d;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .metric-item {
+            padding: 1rem;
+        }
+        
+        .metric-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .metric-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .dark-mode .metric-label {
+            color: #a0a0a0;
+        }
+        
+        .confirmation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .confirmation-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+        
+        .dark-mode .modal-content {
+            background: #2d2d2d;
+        }
+        
+        .confirmation-modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .modal-btn {
+            padding: 0.7rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .modal-btn.confirm {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .modal-btn.cancel {
+            background: var(--neutral);
+            color: var(--dark);
+        }
+        
         footer {
             text-align: center;
             padding: 2rem 0;
             color: #6c757d;
             font-size: 0.9rem;
-            background-color: #f8f9fa;
-            border-top: 1px solid #e9ecef;
+            background-color: var(--light);
+            border-top: 1px solid var(--neutral);
+        }
+        
+        .dark-mode footer {
+            background-color: #1e1e1e;
+            border-top-color: #3d3d3d;
         }
         
         @media (max-width: 768px) {
@@ -297,11 +490,43 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Skeleton loading animation */
+        @keyframes shimmer {
+            0% { background-position: -468px 0 }
+            100% { background-position: 468px 0 }
+        }
+        
+        .skeleton {
+            animation: shimmer 1.5s infinite linear;
+            background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+            background-size: 800px 104px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        
+        .dark-mode .skeleton {
+            background: linear-gradient(to right, #2d2d2d 8%, #3d3d3d 18%, #2d2d2d 33%);
         }
     </style>
 </head>
 <body>
     <header>
+        <button class="theme-toggle" aria-label="Toggle dark mode">
+            <i class="fas fa-moon"></i>
+        </button>
         <div class="header-pattern"></div>
         <div class="container">
             <div class="logo">NAJKS Store</div>
@@ -325,9 +550,9 @@
                     Enhance your business productivity with our powerful tools designed for modern enterprises.
                 </p>
                 
-                <a href="https://median.co/share/epqprw#apk" class="download-btn" download>
+                <button id="download-btn" class="download-btn">
                     <i class="fas fa-download"></i> Download Now
-                </a>
+                </button>
                 
                 <div class="app-specs">
                     <div class="spec-item">
@@ -341,6 +566,28 @@
                     <div class="spec-item">
                         <div class="spec-value">5.0+</div>
                         <div class="spec-label">Android</div>
+                    </div>
+                </div>
+                
+                <div class="metrics">
+                    <h4>Trusted by corporations worldwide</h4>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-value">500+</div>
+                            <div class="metric-label">Companies</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">10M+</div>
+                            <div class="metric-label">Downloads</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">99.9%</div>
+                            <div class="metric-label">Uptime</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-value">4.8★</div>
+                            <div class="metric-label">Rating</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -380,6 +627,17 @@
         </div>
     </div>
     
+    <div class="confirmation-modal" id="confirmation-modal">
+        <div class="modal-content">
+            <h3>Confirm Download</h3>
+            <p>You are about to download NAJKS Download Corporate (25 MB). Would you like to continue?</p>
+            <div class="modal-actions">
+                <button class="modal-btn confirm" id="confirm-download">Download</button>
+                <button class="modal-btn cancel" id="cancel-download">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
     <footer>
         <div class="container">
             <p>© 2023 NAJKS Technologies. All rights reserved.</p>
@@ -388,20 +646,83 @@
     </footer>
     
     <script>
-        // THIC SMART interactive elements
-        document.querySelector('.download-btn').addEventListener('click', function() {
-            // Track download attempt
-            console.log('THIC SMART Download initiated for NAJKS Download Corporate');
-            
-            // Add visual feedback
-            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
-            
-            // Simulate download completion (in real scenario this would be handled by the download)
-            setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-check"></i> Download Complete!';
-                this.style.background = 'linear-gradient(135deg, #4cc9f0, #4895ef)';
-            }, 2000);
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        // Check for saved theme preference or use preferred color scheme
+        const savedTheme = localStorage.getItem('theme') || 
+                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        if (savedTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
+        
+        // Download confirmation modal
+        const downloadBtn = document.getElementById('download-btn');
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const confirmDownload = document.getElementById('confirm-download');
+        const cancelDownload = document.getElementById('cancel-download');
+        
+        downloadBtn.addEventListener('click', () => {
+            confirmationModal.classList.add('active');
+        });
+        
+        confirmDownload.addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+            initiateDownload();
+        });
+        
+        cancelDownload.addEventListener('click', () => {
+            confirmationModal.classList.remove('active');
+        });
+        
+        // Close modal when clicking outside
+        confirmationModal.addEventListener('click', (e) => {
+            if (e.target === confirmationModal) {
+                confirmationModal.classList.remove('active');
+            }
+        });
+        
+        // Simulate download
+        function initiateDownload() {
+            // Show loading state
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Downloading...';
+            downloadBtn.disabled = true;
+            
+            // Simulate download delay
+            setTimeout(() => {
+                // Create temporary link for download
+                const link = document.createElement('a');
+                link.href = 'https://median.co/share/epqprw#apk';
+                link.setAttribute('download', 'NAJKS_Download_Corporate.apk');
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Update button state
+                downloadBtn.innerHTML = '<i class="fas fa-check"></i> Download Complete!';
+                downloadBtn.style.background = 'linear-gradient(135deg, var(--success), var(--accent))';
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    downloadBtn.innerHTML = '<i class="fas fa-download"></i> Download Now';
+                    downloadBtn.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                    downloadBtn.disabled = false;
+                }, 3000);
+                
+                // Track download completion
+                console.log('THIC SMART Download completed for NAJKS Download Corporate');
+            }, 1500);
+        }
         
         // Animate feature cards on scroll
         const featureCards = document.querySelectorAll('.feature-card');
@@ -409,17 +730,40 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
         
         featureCards.forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
             card.style.transition = 'all 0.5s ease';
             observer.observe(card);
+        });
+        
+        // Simulate loading state for metrics (in a real app, this would be API data)
+        window.addEventListener('load', () => {
+            const metrics = document.querySelector('.metrics-grid');
+            metrics.querySelectorAll('.metric-value').forEach(value => {
+                value.classList.add('skeleton');
+                value.textContent = '';
+                
+                setTimeout(() => {
+                    value.classList.remove('skeleton');
+                    // In a real app, you would populate with actual data here
+                    // For demo, we'll just show the original values
+                    const originalText = {
+                        '500+': '500+',
+                        '10M+': '10M+',
+                        '99.9%': '99.9%',
+                        '4.8★': '4.8★'
+                    };
+                    value.textContent = originalText[value.parentElement.querySelector('.metric-label').textContent.trim()];
+                }, 1000);
+            });
         });
     </script>
 </body>
